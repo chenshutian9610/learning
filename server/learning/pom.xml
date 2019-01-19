@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.tree.learning</groupId>
+    <artifactId>learning-root</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>Base</module>
+        <module>Core</module>
+    </modules>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <aspectj.version>1.8.6</aspectj.version>
+        <spring.version>4.3.9.RELEASE</spring.version>
+        <mybatis.version>3.4.2</mybatis.version>
+        <testng.version>6.9.10</testng.version>
+        <mockito.version>2.13.0</mockito.version>
+    </properties>
+
+    <!-- 公用依赖 -->
+    <dependencies>
+        <!-- 测试依赖：testng, mockito -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- 支持 jrebel -->
+            <plugin>
+                <groupId>org.zeroturnaround</groupId>
+                <artifactId>jrebel-maven-plugin</artifactId>
+                <version>1.1.5</version>
+                <configuration>
+                    <addResourcesDirToRebelXml>true</addResourcesDirToRebelXml>
+                    <alwaysGenerate>true</alwaysGenerate>
+                    <showGenerated>true</showGenerated>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>generate-rebel-xml</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

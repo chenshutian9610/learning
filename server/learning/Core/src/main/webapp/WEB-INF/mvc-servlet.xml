@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+    <mvc:annotation-driven/>
+    <tx:annotation-driven/>
+
+    <context:property-placeholder location="classpath:commons.properties"/>
+    <context:component-scan base-package="org.tree.learning.controller"/>
+    <context:component-scan base-package="org.tree.commons.support.controller"/>
+    <context:component-scan base-package="org.tree.commons.support.service.message"/>
+
+    <mvc:interceptors>
+        <bean class="org.tree.learning.controller.AuthInterceptor">
+            <property name="excludes">
+                <list>
+                    <value>/learner/</value>
+                    <value>/debug.do</value>
+                </list>
+            </property>
+            <property name="includes">
+                <list>
+                    <value>/learner/isLogin.do</value>
+                </list>
+            </property>
+        </bean>
+    </mvc:interceptors>
+
+    <!-- jsp
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          p:prefix="/" p:suffix=".jsp"/>-->
+
+    <!-- 文件上传
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
+          p:defaultEncoding="utf-8" p:maxUploadSize="10000000"/>-->
+
+</beans>
